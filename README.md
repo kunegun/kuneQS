@@ -1,4 +1,4 @@
 kuneQuickStart
 =============================
 
-A starter project for GulpJS, Stylus, Connect PHP, AutoPrefixer & BrowserSync
+QuickStart project with GulpJS, Stylus, AutoPrefixer, BrowserSync & Connect PHP.
