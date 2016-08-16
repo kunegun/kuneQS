@@ -1,0 +1,60 @@
+*
+	&:hover,
+	&:active,
+	&:focus
+		outline 0
+select
+  &:-moz-focusring
+    color transparent
+    text-shadow 0 0 0 #000
+*
+	box-sizing border-box
+
+@keyframes ArrowMove{
+    from {transform:translate(0, 0px);}
+    65% {transform:translate(8px, 0);}
+    to {transform: translate(0, 0px);}
+}
+
+////////////////////////////////////// PRELOAD /////////////////////////////////
+#preloader,
+#waiting
+	position fixed
+	top 0
+	left 0
+	right 0
+	bottom 0
+	z-index 99999
+	background rojo-generali
+
+.status
+	background-image url("../img/waiting.gif")
+	background-size contain
+	background-position center
+	background-repeat no-repeat
+	height 100px
+	left 50%
+	margin -50px 0 0 -50px
+	position absolute
+	top 50%
+	width 100px
+
+#waiting
+	display: none;
+////////////////////////////////// PLACEHOLDERS ////////////////////////////////
+::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+  color: white;
+  font-style italic
+}
+::-moz-placeholder { /* Firefox 19+ */
+  color: white;
+  font-style italic
+}
+:-ms-input-placeholder { /* IE 10+ */
+  color: white;
+  font-style italic
+}
+:-moz-placeholder { /* Firefox 18- */
+  color: white;
+  font-style italic
+}
