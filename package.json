@@ -1,12 +1,19 @@
 {
-  "name": "prueba",
-  "version": "1.0.0",
-  "description": "",
+  "name": "kuneQS",
+  "version": "0.0.1",
+  "description": "QuickStart project with GulpJS, Stylus, AutoPrefixer, BrowserSync & Connect PHP.",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kunegun/kuneQS.git"
+  },
+  "keywords": [
+    "frontend"
+  ],
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
+  "author": "Gonzalo Ribera - Kune <kunegun@gmail.com> (http://kune.es)",
   "license": "ISC",
   "devDependencies": {
     "autoprefixer-stylus": "^0.9.4",
@@ -17,13 +24,9 @@
     "gulp": "^3.9.1",
     "gulp-connect-php": "0.0.8",
     "gulp-cssnano": "^2.1.2",
-    "gulp-group-css-media-queries": "^1.1.0",
     "gulp-imagemin": "^3.0.3",
     "gulp-plumber": "^1.1.0",
     "gulp-sourcemaps": "^1.6.0",
     "gulp-stylus": "^2.5.0",
-    "jeet": "^6.1.4",
-    "kouto-swiss": "^0.12.0",
-    "rupture": "^0.6.1"
   }
 }

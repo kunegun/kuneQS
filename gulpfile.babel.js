@@ -1,16 +1,16 @@
 'use strict';
 
-const browserSync = require('browser-sync');
-const connect = require('gulp-connect-php');
-const cssnano = require('gulp-cssnano');
-const gulp = require('gulp');
-const imagemin = require('gulp-imagemin');
-const plumber = require('gulp-plumber');
-const prefixer = require('autoprefixer-stylus');
-const sourcemaps = require('gulp-sourcemaps');
-const stylus = require('gulp-stylus');
-const reload = browserSync.reload;
+import browserSync from 'browser-sync';
+import connect from 'gulp-connect-php';
+import cssnano from 'gulp-cssnano';
+import gulp from 'gulp';
+import imagemin from 'gulp-imagemin';
+import plumber from 'gulp-plumber';
+import prefixer from 'autoprefixer-stylus';
+import sourcemaps from 'gulp-sourcemaps';
+import stylus from 'gulp-stylus';
 
+const reload = browserSync.reload;
 const devPaths = {
     js: 'dev/js/main.js',
     css: 'dev/stylus/**/*.styl',
