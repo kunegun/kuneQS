@@ -4,6 +4,7 @@ import browserSync from 'browser-sync';
 import connect from 'gulp-connect-php';
 import cssnano from 'gulp-cssnano';
 import gulp from 'gulp';
+import eslint from 'gulp-eslint';
 import imagemin from 'gulp-imagemin';
 import plumber from 'gulp-plumber';
 import prefixer from 'autoprefixer-stylus';
@@ -48,6 +49,12 @@ gulp.task('images', () => {
         .pipe(gulp.dest(deployPaths.img));
 });
 // Scripts
+gulp.task('lint', () =>
+  gulp.src(devPaths.js)
+    .pipe(eslint())
+    .pipe(eslint.format())
+    .pipe(eslint.failAfterError())
+);
 gulp.task('scripts', () => {
     gulp.src(devPaths.js)
         .pipe(plumber())
@@ -72,6 +79,7 @@ gulp.task('connect-sync', function() {
   }, function (){
     browserSync({
     	logLevel: "info",
+        logPrefix: 'KQS',
     	notify: true,
 		proxy: '127.0.0.1:7777',
 		port: 4444,
@@ -87,7 +95,7 @@ gulp.task('watch', function() {
     gulp.watch('*.php').on('change', reload);
 	gulp.watch(devPaths.mainStyl, ['css']);
 	gulp.watch(devPaths.img, ['images']);
-    gulp.watch(devPaths.js, ['scripts']);
+    gulp.watch(devPaths.js, ['lint', 'scripts']);
 });
 
 gulp.task('default', ['watch', 'connect-sync']);
