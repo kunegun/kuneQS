@@ -12,7 +12,7 @@ import stylus from 'gulp-stylus';
 
 const reload = browserSync.reload;
 const devPaths = {
-    js: 'dev/js/main.js',
+    js: 'dev/js/**/*',
     css: 'dev/stylus/**/*.styl',
     mainStyl: 'dev/stylus/main.styl',
     img: 'dev/img/**/*'
@@ -22,7 +22,7 @@ const deployPaths = {
     css: 'deploy/css/',
     img: 'deploy/img'
 };
-
+// Compile CSS
 gulp.task('css', () => {
     gulp.src(devPaths.mainStyl)
         .pipe(plumber())
@@ -36,6 +36,7 @@ gulp.task('css', () => {
         .pipe(gulp.dest(deployPaths.css))
         .pipe(browserSync.stream());
 });
+// Optimize images
 gulp.task('images', () => {
     gulp.src(devPaths.img)
         .pipe(plumber())
@@ -46,7 +47,23 @@ gulp.task('images', () => {
         }))
         .pipe(gulp.dest(deployPaths.img));
 });
-
+// Scripts
+gulp.task('scripts', () => {
+    gulp.src(devPaths.js)
+        .pipe(plumber())
+        .pipe(gulp.dest(deployPaths.js));
+});
+// Copy all files at the root level (dev) except the stylus folder
+gulp.task('copy', () =>
+  gulp.src([
+    'dev/**',
+    '!dev/stylus',
+    '!dev/stylus/**',
+  ], {
+    dot: true
+  }).pipe(gulp.dest('deploy/web'))
+);
+// Watch files for changes & reload
 gulp.task('connect-sync', function() {
   connect.server({
   	port: 7777,
@@ -62,13 +79,15 @@ gulp.task('connect-sync', function() {
     });
   });
 
-  gulp.watch('*.php').on('change', reload);
+
 
 });
 
 gulp.task('watch', function() {
+    gulp.watch('*.php').on('change', reload);
 	gulp.watch(devPaths.mainStyl, ['css']);
 	gulp.watch(devPaths.img, ['images']);
+    gulp.watch(devPaths.js, ['scripts']);
 });
 
 gulp.task('default', ['watch', 'connect-sync']);
