@@ -3,6 +3,7 @@
 import browserSync from 'browser-sync';
 import connect from 'gulp-connect-php';
 import cssnano from 'gulp-cssnano';
+import del from 'del';
 import gulp from 'gulp';
 import eslint from 'gulp-eslint';
 import imagemin from 'gulp-imagemin';
@@ -21,7 +22,8 @@ const devPaths = {
 const deployPaths = {
     js: 'deploy/js/',
     css: 'deploy/css/',
-    img: 'deploy/img'
+    img: 'deploy/img',
+    assets: 'deploy'
 };
 // Compile CSS
 gulp.task('css', () => {
@@ -68,14 +70,17 @@ gulp.task('copy', () =>
     '!dev/stylus/**',
   ], {
     dot: true
-  }).pipe(gulp.dest('deploy/web'))
+  }).pipe(gulp.dest('deploy'))
 );
+// Clean output directory
+gulp.task('clean', () => del(['deploy/*', '!deploy/.git'], {dot: true}));
 // Watch files for changes & reload
 gulp.task('connect-sync', function() {
   connect.server({
   	port: 7777,
-  	open:false,
-  	stdio: 'ignore'
+  	open: false,
+  	//stdio: 'ignore',
+    open: true,
   }, function (){
     browserSync({
     	logLevel: "info",
@@ -83,12 +88,10 @@ gulp.task('connect-sync', function() {
     	notify: true,
 		proxy: '127.0.0.1:7777',
 		port: 4444,
+        open: false,
 		browser: 'firefox'
     });
   });
-
-
-
 });
 
 gulp.task('watch', function() {
@@ -99,3 +102,4 @@ gulp.task('watch', function() {
 });
 
 gulp.task('default', ['watch', 'connect-sync']);
+gulp.task('deploy', ['clean', 'images', 'copy', 'lint', 'css']);
